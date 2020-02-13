@@ -2,8 +2,10 @@ package bookshop.service;
 
 import java.util.List;
 
-import bookshop.model.Book;
+import org.springframework.stereotype.Service;
 
+import bookshop.model.Book;
+@Service
 public interface BookService {
 	public void insert(Book book);
 	public void delete(long id);

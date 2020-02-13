@@ -3,10 +3,11 @@ package bookshop.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import bookshop.model.Book;
 import bookshop.repository.BookRepository;
-
+@Service
 public class BookServiceImp implements BookService{
 	@Autowired
 	BookRepository bookRepository;

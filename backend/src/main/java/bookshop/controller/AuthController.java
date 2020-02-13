@@ -21,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import bookshop.exception.AppException;
 import bookshop.model.Role;
-import bookshop.model.RoleName;
 import bookshop.model.User;
 import bookshop.payload.ApiResponse;
 import bookshop.payload.JwtAuthenticationResponse;
@@ -82,7 +81,7 @@ public class AuthController {
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            Role userRole = roleRepository.findByName(RoleName.User)
+            Role userRole = roleRepository.findByName("User")
                     .orElseThrow(() -> new AppException("User Role not set."));
 
             user.setRoles(Collections.singleton(userRole));
