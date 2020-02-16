@@ -1,2 +1,2 @@
 # bookshop
-Using Technologies : SpringBoot , SpringSecurity, JWT , Angular8 , MySQL 
+Using Technologies : SpringBoot , SpringSecurity, JWT , React.js , MySQL 
