@@ -3,20 +3,20 @@ import javax.validation.constraints.*;
 
 public class SignUpRequest {
     @NotBlank
-    @Size(min = 4, max = 40)
+    @Size(min = 4, max = 40,message = "The number of characters of your name must be between 4 and 40.")
     private String name;
 
     @NotBlank
-    @Size(min = 3, max = 15)
+    @Size(min = 3, max = 15 , message = "The number of characters of your username must be between 3 and 15.")
     private String username;
 
     @NotBlank
     @Size(max = 40)
-    @Email
+    @Email(message = "Please enter your e-mail address correctly")
     private String email;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 6, max = 20,message="The number of characters of your password must be between 6 and 20.")
     private String password;
 
     public String getName() {

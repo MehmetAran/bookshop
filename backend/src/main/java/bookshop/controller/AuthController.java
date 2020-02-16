@@ -3,16 +3,21 @@ package bookshop.controller;
 import java.net.URI;
 import java.util.Collections;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +86,7 @@ public class AuthController {
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            Role userRole = roleRepository.findByName("User")
+            Role userRole = roleRepository.findByName("ROLE_USER")
                     .orElseThrow(() -> new AppException("User Role not set."));
 
             user.setRoles(Collections.singleton(userRole));
@@ -94,4 +99,6 @@ public class AuthController {
 
             return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
         }
+        
+
 }
