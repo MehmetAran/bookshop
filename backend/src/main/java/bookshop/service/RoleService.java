@@ -13,4 +13,5 @@ public interface RoleService {
 	public void update(Role role);
 	public Role findById(long id);
 	public List<Role> allList();
+	public Role findByRoleName(String roleName);
 }

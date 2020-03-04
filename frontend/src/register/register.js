@@ -13,24 +13,7 @@ export default class Register extends Component {
           }
     }
     
-    register =(e)=>{
-        e.preventDefault();
-       fetch('http://localhost:5000/api/auth/signin', {
-        method: 'post',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          usernameOrEmail: this.state.emailOrUsername,
-          password: this.state.password,
-        })
-       }).then(response => response.json())
-       .then(
-         data =>
-         this.setState({
-           token:data['accessToken'],
-         })
-       )
-       .catch(error => console.log(error));  
-    }
+
     
 
   changeEmail = (e) =>{

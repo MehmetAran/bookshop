@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Login from './login/login';
 import Register from './register/register';
+import HomeForUser from './home/homeForUser';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,6 +37,12 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/home">
+          < HomeForUser/>
+        </Route>
+        <Route path="/">
+          < HomeForUser/>
         </Route>
       </Switch>
     </div>
