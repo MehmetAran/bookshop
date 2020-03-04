@@ -77,8 +77,10 @@ public class UserController {
     	
     	return  ResponseEntity.ok().body(new ChangeUserRoleResponse(user.getId(),"Successfully added to the role"));
     }
+    
+    
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-  	@PostMapping("/addRole")
+  	@PostMapping("/deleteRole")
   	ResponseEntity<?> deleteRoleToUser(@Valid @RequestBody ChangeUserRoleRequest changeUserRoleRequest){
     	User user = userServiceImp.findById(changeUserRoleRequest.getUserID());
     	if(user == null)
