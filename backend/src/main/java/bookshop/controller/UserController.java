@@ -98,7 +98,7 @@ public class UserController {
     	Role role = roleServiceImp.findByRoleName(changeUserRoleRequest.getRole());
     	if(role == null )
     		ResponseEntity.badRequest().body(new ChangeUserRoleResponse(user.getId(),"No such role."));
-    	roles.add(role);
+    	roles.remove(role);
     	user.setRoles(roles);
     	
     	return  ResponseEntity.ok().body(new ChangeUserRoleResponse(user.getId(),"Successfully added to the role"));
