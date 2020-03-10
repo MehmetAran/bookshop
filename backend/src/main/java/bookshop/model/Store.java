@@ -1,7 +1,11 @@
 package bookshop.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -12,16 +16,18 @@ import javax.validation.constraints.Positive;
 @Entity
 @Table
 public class Store {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long storeID;
-	@ManyToMany
+	@ManyToOne
 	@NotBlank
 	@NotEmpty
 	private User sellerID;
-	@ManyToMany
+	@ManyToOne
 	@NotBlank
 	@NotEmpty
 	private User receiverID;
-	@ManyToMany
+	@ManyToOne
 	@NotBlank
 	@NotEmpty
 	private Book bookID;

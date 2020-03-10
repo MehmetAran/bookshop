@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -14,25 +15,25 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
 @Entity
-@Table
+@Table(name = "orders")
 public class Order {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long orderID;
 	@NotEmpty
 	@NotBlank
-	@ManyToMany
+	@ManyToOne
 	private User sellerID;
-	@ManyToMany
 	@NotEmpty
 	@NotBlank
+	@ManyToOne
 	private Book bookId;
 	@NotBlank
 	@NotEmpty
 	private double price;
-	@ManyToMany
 	@NotEmpty
 	@NotBlank
+	@ManyToOne
 	private User customerID;
     @CreatedBy
     private Long createdBy;
