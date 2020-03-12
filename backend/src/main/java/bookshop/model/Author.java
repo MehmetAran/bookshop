@@ -40,7 +40,7 @@ public class Author {
     @NotNull
     @OneToOne
     @JoinColumn(name ="FK_AuthorUser")
-    private User userID;
+    private User user;
 	public long getAuthorID() {
 		return authorID;
 	}
@@ -65,11 +65,11 @@ public class Author {
 	public void setAbout(String about) {
 		this.about = about;
 	}
-	public User getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
-	public void setUserID(User userID) {
-		this.userID = userID;
+	public void setUser(User userID) {
+		this.user = userID;
 	}
     
     

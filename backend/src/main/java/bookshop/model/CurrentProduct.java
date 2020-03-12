@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 
 @Entity
 @Table
-public class Store {
+public class CurrentProduct {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long storeID;

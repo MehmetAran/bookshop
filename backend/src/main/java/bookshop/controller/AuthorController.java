@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import bookshop.model.Role;
 import bookshop.model.User;
 import bookshop.payload.ApiResponse;
 import bookshop.payload.InsertAuthorRequest;
+import bookshop.payload.UpdateAuthorRequest;
 import bookshop.security.CurrentUser;
 import bookshop.security.UserPrincipal;
 import bookshop.service.AuthorService;
@@ -39,12 +41,12 @@ public class AuthorController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertAuthor(@Valid @RequestBody InsertAuthorRequest newAuthor) {
 		if(userServiceImp.findById(newAuthor.getUserID()) == null)
-			return  ResponseEntity.badRequest().body(new ApiResponse(false, "Not Found User by userID"));
+			return  ResponseEntity.badRequest().body(new ApiResponse(false, "Not Found Author by userID"));
 		Author author = new Author();
 		author.setAbout(newAuthor.getAbout());
 		author.setAuthorLastname(newAuthor.getAuthorLastname());
 		author.setAuthorName(author.getAuthorName());
-		author.setUserID(author.getUserID());
+		author.setUser(author.getUser());
 		authorServiceImp.insert(author);
 		return ResponseEntity.ok().body(new ApiResponse(true, "The user is now a author."));
 	}
@@ -59,7 +61,7 @@ public class AuthorController {
 			}
 		}
 		Author author = authorServiceImp.findByID(id);
-		if(author.getUserID().getId() != user.getId())
+		if(author.getUser().getId() != user.getId())
 			return ResponseEntity.badRequest().body(new ApiResponse(false, "Sorry you are not authorized."));
 		
 		return ResponseEntity.ok().body(author);
@@ -76,7 +78,7 @@ public class AuthorController {
 			}
 		}
 		Author author = authorServiceImp.findByID(id);
-		if(author.getUserID().getId() != user.getId())
+		if(author.getUser().getId() != user.getId())
 			return ResponseEntity.badRequest().body(new ApiResponse(false, "Sorry you are not authorized."));
 		
 		authorServiceImp.delete(id);
@@ -84,11 +86,27 @@ public class AuthorController {
 	}
 	
 	@DeleteMapping("/list")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') ")
 	public ResponseEntity<?> allAuthor(){
 		return ResponseEntity.ok().body(authorServiceImp.findAll());
 	}
 	
+	
+	@PutMapping("update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> updateAuthor(@RequestBody @Valid UpdateAuthorRequest author){
+		Author updateAuthor = authorServiceImp.findByID(author.getAuthorID());
+		if(updateAuthor == null)
+			return ResponseEntity.badRequest().body(new ApiResponse(false,"Not Found Author by userID"));
+		updateAuthor.setAbout(author.getAuthorAbout());
+		updateAuthor.setAuthorLastname(author.getAuthorLastname());
+		updateAuthor.setAuthorName(author.getAuthorName());
+
+
+		authorServiceImp.update(updateAuthor);
+		return ResponseEntity.badRequest().body(new ApiResponse(true,"Author is updated"));
+
+	}
 	
 }
 
